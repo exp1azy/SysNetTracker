@@ -1,0 +1,5 @@
+PacketSniffer/bin/
+PacketSniffer/Properties/
+PacketSniffer/obj/
+.vs/
+PacketSniffer/.config/
