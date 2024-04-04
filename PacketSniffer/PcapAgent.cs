@@ -9,7 +9,6 @@ using System.Collections.Concurrent;
 using Serilog;
 using WebSpectre.Shared.Agents;
 using PcapDevice = WebSpectre.Shared.Agents.PcapDevice;
-using System.Net.NetworkInformation;
 using NetworkInterface = System.Net.NetworkInformation.NetworkInterface;
 
 namespace PacketSniffer
@@ -136,7 +135,7 @@ namespace PacketSniffer
                 throw new ApplicationException(Error.NoDevicesWereFound);
             }
 
-            int interfaceIndex = GetInterfaceIndex(devices, adapter);
+            int interfaceIndex = GetInterfaceIndex(devices, adapter.Trim());
             if (interfaceIndex < 0)
             {
                 Log.Logger.Error(Error.NoSuchInterface, adapter);
@@ -176,8 +175,6 @@ namespace PacketSniffer
             {
                 _captureCancellation!.Cancel();
 
-                _captureTask?.Wait();
-
                 _captureCancellation.Dispose();
                 _captureCancellation = null;
 
@@ -213,11 +210,14 @@ namespace PacketSniffer
             statisticsDevice.Open();
             device.Open();
 
+            statisticsDevice.Filter = filter;
+            device.Filter = filter;
+
             statisticsDevice.StartCapture();
             device.StartCapture();
 
             while (!cancellationToken.IsCancellationRequested)
-                await Task.Delay(2000);
+                await Task.Delay(2000, cancellationToken);
 
             statisticsDevice.StopCapture();
             device.StopCapture();
