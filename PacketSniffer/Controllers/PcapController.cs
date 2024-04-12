@@ -6,20 +6,15 @@ namespace PacketSniffer.Controllers
     /// <summary>
     /// Контроллер агента.
     /// </summary>
+    /// <remarks>
+    /// Конструктор.
+    /// </remarks>
+    /// <param name="pcap">Сервис агента.</param>
     [ApiController]
     [Route("[controller]")]
-    public class PcapController : ControllerBase
+    public class PcapController(PcapAgent pcap) : ControllerBase
     {
-        private readonly PcapAgent _capAgent;
-
-        /// <summary>
-        /// Конструктор.
-        /// </summary>
-        /// <param name="pcap">Сервис агента.</param>
-        public PcapController(PcapAgent pcap)
-        {
-            _capAgent = pcap;
-        }
+        private readonly PcapAgent _capAgent = pcap;
 
         /// <summary>
         /// Информация о хосте.

@@ -78,6 +78,7 @@ namespace PacketSniffer
             },
             IPAddresses = Dns.GetHostAddresses(Dns.GetHostName()).Select(ip => ip.ToString()).ToArray(),
             NetworkInformation = NetworkInterface.GetAllNetworkInterfaces().Select(i => (NetworkInformation)i).ToList(),
+            ResourcesUsage = CurrentMachineHelper.GetCurrentUsage(),
             IsCaptureProcessing = _isSnifferCapturing
         };           
            
@@ -194,13 +195,6 @@ namespace PacketSniffer
         /// <exception cref="ApplicationException"></exception>
         private async Task ListenRequiredInterfaceAsync(LibPcapLiveDeviceList devices, int interfaceToSniff, CancellationToken cancellationToken)
         {
-            var filter = _config["Filters"];
-            if (string.IsNullOrEmpty(filter))
-            {
-                Log.Logger.Error(Error.FailedToReadProtocols);
-                throw new ApplicationException(Error.FailedToReadProtocols);
-            }
-
             using var statisticsDevice = new StatisticsDevice(devices[interfaceToSniff].Interface);
             using var device = devices[interfaceToSniff];
 
@@ -210,14 +204,13 @@ namespace PacketSniffer
             statisticsDevice.Open();
             device.Open();
 
-            statisticsDevice.Filter = filter;
-            device.Filter = filter;
-
             statisticsDevice.StartCapture();
             device.StartCapture();
 
             while (!cancellationToken.IsCancellationRequested)
+            {
                 await Task.Delay(2000, cancellationToken);
+            }
 
             statisticsDevice.StopCapture();
             device.StopCapture();

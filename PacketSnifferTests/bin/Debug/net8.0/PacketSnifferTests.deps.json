@@ -10,6 +10,7 @@
         "dependencies": {
           "Microsoft.NET.Test.Sdk": "17.9.0",
           "SharpPcap": "6.2.5",
+          "WebSpectre.Shared": "1.0.0",
           "coverlet.collector": "6.0.0",
           "xunit": "2.6.6",
           "xunit.runner.visualstudio": "2.5.6"
@@ -24,6 +25,14 @@
           "lib/netcoreapp3.1/Microsoft.VisualStudio.CodeCoverage.Shim.dll": {
             "assemblyVersion": "15.0.0.0",
             "fileVersion": "17.900.724.7204"
+          }
+        }
+      },
+      "Microsoft.Extensions.Logging.Abstractions/6.0.0": {
+        "runtime": {
+          "lib/net6.0/Microsoft.Extensions.Logging.Abstractions.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
           }
         }
       },
@@ -135,7 +144,7 @@
       "Microsoft.TestPlatform.TestHost/17.9.0": {
         "dependencies": {
           "Microsoft.TestPlatform.ObjectModel": "17.9.0",
-          "Newtonsoft.Json": "13.0.1"
+          "Newtonsoft.Json": "13.0.3"
         },
         "runtime": {
           "lib/netcoreapp3.1/Microsoft.TestPlatform.CommunicationUtilities.dll": {
@@ -279,28 +288,39 @@
           }
         }
       },
-      "Newtonsoft.Json/13.0.1": {
+      "Newtonsoft.Json/13.0.3": {
         "runtime": {
-          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
             "assemblyVersion": "13.0.0.0",
-            "fileVersion": "13.0.1.25517"
+            "fileVersion": "13.0.3.27908"
           }
         }
       },
-      "PacketDotNet/1.4.6": {
+      "PacketDotNet/1.4.7": {
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         },
         "runtime": {
           "lib/netstandard2.1/PacketDotNet.dll": {
-            "assemblyVersion": "1.4.6.0",
-            "fileVersion": "1.4.6.0"
+            "assemblyVersion": "1.4.7.0",
+            "fileVersion": "1.4.7.0"
+          }
+        }
+      },
+      "Pipelines.Sockets.Unofficial/2.2.8": {
+        "dependencies": {
+          "System.IO.Pipelines": "5.0.1"
+        },
+        "runtime": {
+          "lib/net5.0/Pipelines.Sockets.Unofficial.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "2.2.8.1080"
           }
         }
       },
       "SharpPcap/6.2.5": {
         "dependencies": {
-          "PacketDotNet": "1.4.6",
+          "PacketDotNet": "1.4.7",
           "System.Memory": "4.5.5",
           "System.Text.Encoding.CodePages": "6.0.0"
         },
@@ -308,6 +328,26 @@
           "lib/netstandard2.0/SharpPcap.dll": {
             "assemblyVersion": "6.2.5.0",
             "fileVersion": "6.2.5.0"
+          }
+        }
+      },
+      "StackExchange.Redis/2.7.17": {
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.0",
+          "Pipelines.Sockets.Unofficial": "2.2.8"
+        },
+        "runtime": {
+          "lib/net6.0/StackExchange.Redis.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.7.17.27058"
+          }
+        }
+      },
+      "System.IO.Pipelines/5.0.1": {
+        "runtime": {
+          "lib/netcoreapp3.0/System.IO.Pipelines.dll": {
+            "assemblyVersion": "5.0.0.1",
+            "fileVersion": "5.0.120.57516"
           }
         }
       },
@@ -371,7 +411,18 @@
           }
         }
       },
-      "xunit.runner.visualstudio/2.5.6": {}
+      "xunit.runner.visualstudio/2.5.6": {},
+      "WebSpectre.Shared/1.0.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3",
+          "PacketDotNet": "1.4.7",
+          "SharpPcap": "6.2.5",
+          "StackExchange.Redis": "2.7.17"
+        },
+        "runtime": {
+          "WebSpectre.Shared.dll": {}
+        }
+      }
     }
   },
   "libraries": {
@@ -394,6 +445,13 @@
       "path": "microsoft.codecoverage/17.9.0",
       "hashPath": "microsoft.codecoverage.17.9.0.nupkg.sha512"
     },
+    "Microsoft.Extensions.Logging.Abstractions/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/HggWBbTwy8TgebGSX5DBZ24ndhzi93sHUBDvP1IxbZD7FDokYzdAr6+vbWGjw2XAfR2EJ1sfKUotpjHnFWPxA==",
+      "path": "microsoft.extensions.logging.abstractions/6.0.0",
+      "hashPath": "microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512"
+    },
     "Microsoft.NET.Test.Sdk/17.9.0": {
       "type": "package",
       "serviceable": true,
@@ -415,19 +473,26 @@
       "path": "microsoft.testplatform.testhost/17.9.0",
       "hashPath": "microsoft.testplatform.testhost.17.9.0.nupkg.sha512"
     },
-    "Newtonsoft.Json/13.0.1": {
+    "Newtonsoft.Json/13.0.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
-      "path": "newtonsoft.json/13.0.1",
-      "hashPath": "newtonsoft.json.13.0.1.nupkg.sha512"
+      "sha512": "sha512-HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
+      "path": "newtonsoft.json/13.0.3",
+      "hashPath": "newtonsoft.json.13.0.3.nupkg.sha512"
     },
-    "PacketDotNet/1.4.6": {
+    "PacketDotNet/1.4.7": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-alTw0mrKv2wDbF3jnXl4yoNqSHu4atDrPC3SMlMI8UaaLI4QuULga99SAUg+9V9y9haYBLu5EbMLtOza4O7XnA==",
-      "path": "packetdotnet/1.4.6",
-      "hashPath": "packetdotnet.1.4.6.nupkg.sha512"
+      "sha512": "sha512-xh4MGjkDFhJfFtAr6IEwg3ocPm3TO0/AxbYeCVoh9BaVT0xeWJB1p0nwKQ9olsQiQtSqF8M0UXz97U2VnOYY0w==",
+      "path": "packetdotnet/1.4.7",
+      "hashPath": "packetdotnet.1.4.7.nupkg.sha512"
+    },
+    "Pipelines.Sockets.Unofficial/2.2.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-zG2FApP5zxSx6OcdJQLbZDk2AVlN2BNQD6MorwIfV6gVj0RRxWPEp2LXAxqDGZqeNV1Zp0BNPcNaey/GXmTdvQ==",
+      "path": "pipelines.sockets.unofficial/2.2.8",
+      "hashPath": "pipelines.sockets.unofficial.2.2.8.nupkg.sha512"
     },
     "SharpPcap/6.2.5": {
       "type": "package",
@@ -435,6 +500,20 @@
       "sha512": "sha512-irLFbxr6Ks6T6UaWqTxlhGF1nyJstTc4pVUOj8mlkPlQdAdP34+1h0yekcyiCc3ewZ5P4sNrvpbkc4SwcIksiw==",
       "path": "sharppcap/6.2.5",
       "hashPath": "sharppcap.6.2.5.nupkg.sha512"
+    },
+    "StackExchange.Redis/2.7.17": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-PduekHww3CrCBr1ebIPX4k4zdah9wjJ4AQZXfp+JfGJQfwf8s1SHSY7kthDi9MP0ULcYrNw4xnbRXFMbCryIig==",
+      "path": "stackexchange.redis/2.7.17",
+      "hashPath": "stackexchange.redis.2.7.17.nupkg.sha512"
+    },
+    "System.IO.Pipelines/5.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qEePWsaq9LoEEIqhbGe6D5J8c9IqQOUuTzzV6wn1POlfdLkJliZY3OlB0j0f17uMWlqZYjH7txj+2YbyrIA8Yg==",
+      "path": "system.io.pipelines/5.0.1",
+      "hashPath": "system.io.pipelines.5.0.1.nupkg.sha512"
     },
     "System.Memory/4.5.5": {
       "type": "package",
@@ -519,6 +598,11 @@
       "sha512": "sha512-CW6uhMXNaQQNMSG1IWhHkBT+V5eqHqn7MP0zfNMhU9wS/sgKX7FGL3rzoaUgt26wkY3bpf7pDVw3IjXhwfiP4w==",
       "path": "xunit.runner.visualstudio/2.5.6",
       "hashPath": "xunit.runner.visualstudio.2.5.6.nupkg.sha512"
+    },
+    "WebSpectre.Shared/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }
