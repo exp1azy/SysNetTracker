@@ -57,11 +57,6 @@ namespace PacketSniffer
         }
 
         /// <summary>
-        /// <see cref="true"/>, если захват трафика запущен, иначе <see cref="false"/>.
-        /// </summary>
-        public bool IsSnifferCapturing => _isSnifferCapturing;
-
-        /// <summary>
         /// Метод, необходимый для получения информации о хосте.
         /// </summary>
         /// <returns>Информация о текущем хосте в формате <see cref="HostInfo"/></returns>

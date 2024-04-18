@@ -11,7 +11,6 @@ namespace PacketSniffer
             var builder = WebApplication.CreateBuilder(args);
 
             builder.RunAsProcess();
-            builder.StartWithWindows();
 
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.EventLog("PacketSniffer", manageEventSource: true)

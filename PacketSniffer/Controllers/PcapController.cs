@@ -24,13 +24,6 @@ namespace PacketSniffer.Controllers
         public IActionResult Info() => Ok(_capAgent.GetHostInfo());
 
         /// <summary>
-        /// Запущен захват сетевого трафика или нет.
-        /// </summary>
-        /// <returns>true, если захват запущен, иначе false</returns>
-        [HttpGet("status")]
-        public IActionResult Status() => Ok(_capAgent.IsSnifferCapturing);
-
-        /// <summary>
         /// Запуск захвата сетевого трафика.
         /// </summary>
         /// <param name="a">Сетевой адаптер.</param>

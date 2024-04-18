@@ -6,12 +6,12 @@ namespace PacketSniffer
 {
     public static class CurrentMachineHelper
     {
-        private static PerformanceCounter cpuCounter = new("Processor", "% Processor Time", "_Total");
-        private static PerformanceCounter memoryCounter = new("Memory", "Available MBytes");
-        private static PerformanceCounter diskCounter = new("PhysicalDisk", "% Disk Time", "_Total");
+        private static readonly PerformanceCounter cpuCounter = new("Processor", "% Processor Time", "_Total");
+        private static readonly PerformanceCounter memoryCounter = new("Memory", "Available MBytes");
+        private static readonly PerformanceCounter diskCounter = new("PhysicalDisk", "% Disk Time", "_Total");
 
         /// <summary>
-        /// Получить информацию об использовании ресурсов.
+        /// Получить информацию об использовании ресурсов данного компьютера.
         /// </summary>
         /// <returns>Информация об использовании CPU, доступной памяти ОЗУ и использовании диска.</returns>
         public static ResourcesUsage GetCurrentUsage() => new()
