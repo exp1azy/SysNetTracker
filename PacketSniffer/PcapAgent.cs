@@ -6,7 +6,6 @@ using SharpPcap;
 using Newtonsoft.Json;
 using PacketSniffer.Resources;
 using System.Collections.Concurrent;
-using Serilog;
 using WebSpectre.Shared.Agents;
 using PcapDevice = WebSpectre.Shared.Agents.PcapDevice;
 using NetworkInterface = System.Net.NetworkInformation.NetworkInterface;
@@ -46,14 +45,9 @@ namespace PacketSniffer
             _rawPacketsQueue = new ConcurrentQueue<RawCapture>();
 
             if (int.TryParse(_config["MaxQueueSize"], out var maxQueueSize))
-            {
                 _maxQueueSize = maxQueueSize;
-            }
             else
-            {
                 _maxQueueSize = 20;
-                Log.Logger.Warning(Error.FailedToReadQueuesSizeData);
-            }
         }
 
         /// <summary>
@@ -112,31 +106,19 @@ namespace PacketSniffer
         public void Start(string adapter)
         {
             if (string.IsNullOrEmpty(_config["RedisConnection"]))
-            {
-                Log.Logger.Error(Error.FailedToReadRedisConnectionString);
                 throw new ApplicationException(Error.FailedToReadRedisConnectionString);
-            }
 
             var os = Environment.OSVersion;
             if (os.Platform != PlatformID.Win32NT)
-            {
-                Log.Logger.Error(Error.UnsupportedOS);
                 throw new ApplicationException(Error.UnsupportedOS);
-            }
 
             var devices = LibPcapLiveDeviceList.Instance;
             if (devices.Count < 1)
-            {
-                Log.Logger.Error(Error.NoDevicesWereFound);
                 throw new ApplicationException(Error.NoDevicesWereFound);
-            }
 
             int interfaceIndex = GetInterfaceIndex(devices, adapter.Trim());
             if (interfaceIndex < 0)
-            {
-                Log.Logger.Error(Error.NoSuchInterface, adapter);
                 throw new ApplicationException($"{Error.NoSuchInterface} {adapter}");
-            }
              
             if (_captureTask == null || _captureTask.IsCompleted)
             {
@@ -158,8 +140,6 @@ namespace PacketSniffer
             {
                 _isSnifferCapturing = true;
             }
-
-            Log.Logger.Information(Information.LocalSniffingStarted);
         }
 
         /// <summary>
@@ -175,8 +155,6 @@ namespace PacketSniffer
                 _captureCancellation = null;
 
                 _isSnifferCapturing = false;
-
-                Log.Logger.Information(Information.LocalSniffingStopped);
             }
         }
 
@@ -203,10 +181,8 @@ namespace PacketSniffer
             device.StartCapture();
 
             while (!cancellationToken.IsCancellationRequested)
-            {
-                await Task.Delay(2000, cancellationToken);
-            }
-
+                await Task.Delay(1000, cancellationToken);
+            
             statisticsDevice.StopCapture();
             device.StopCapture();
         }

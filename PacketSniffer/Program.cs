@@ -1,6 +1,5 @@
 using PacketSniffer.Resources;
 using PacketSniffer.Startup;
-using Serilog;
 
 namespace PacketSniffer
 {
@@ -11,10 +10,6 @@ namespace PacketSniffer
             var builder = WebApplication.CreateBuilder(args);
 
             builder.RunAsProcess();
-
-            Log.Logger = new LoggerConfiguration()
-                .WriteTo.EventLog("PacketSniffer", manageEventSource: true)
-                .CreateLogger();
 
             builder.Services.AddCors(o => o.AddDefaultPolicy(p =>
             {
