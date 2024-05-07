@@ -34,7 +34,7 @@ namespace PacketSniffer
 
             builder.CreateStreamIfNeeded(connection, host);
 
-            builder.WebHost.UseUrls($"https://{host}:{port}");
+            builder.WebHost.UseUrls($"http://{host}:{port}");
 
             builder.Services.AddSingleton<PcapAgent>();
             builder.Services.AddTransient(sp => new RedisService(connection, host));
