@@ -12,9 +12,9 @@ namespace PacketSniffer
 
             builder.RunAsProcess();
 
-            Log.Logger = new LoggerConfiguration()
-                .WriteTo.EventLog("PacketSniffer", manageEventSource: true)
-                .CreateLogger();
+            //Log.Logger = new LoggerConfiguration()
+            //    .WriteTo.EventLog("PacketSniffer", manageEventSource: true)
+            //    .CreateLogger();
 
             builder.Services.AddCors(o => o.AddDefaultPolicy(p =>
             {
@@ -39,7 +39,7 @@ namespace PacketSniffer
 
             builder.CreateStreamIfNeeded(connection, host);
 
-            builder.WebHost.UseUrls($"https://{host}:{port}");
+            builder.WebHost.UseUrls($"http://{host}:{port}");
 
             builder.Services.AddSingleton<PcapAgent>();
             builder.Services.AddTransient(sp => new RedisService(connection, host));

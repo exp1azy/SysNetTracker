@@ -10,6 +10,7 @@ using Serilog;
 using WebSpectre.Shared.Agents;
 using PcapDevice = WebSpectre.Shared.Agents.PcapDevice;
 using NetworkInterface = System.Net.NetworkInformation.NetworkInterface;
+using WebSpectre.Shared;
 
 namespace PacketSniffer
 {
@@ -25,8 +26,11 @@ namespace PacketSniffer
         private Task? _captureTask;
         private CancellationTokenSource? _captureCancellation;
 
-        private ConcurrentQueue<StatisticsEventArgs> _statisticsQueue;
-        private ConcurrentQueue<RawCapture> _rawPacketsQueue;
+        private readonly List<StatisticsEventArgs> _statisticsBatch;
+        private readonly List<RawCapture> _rawPacketsBatch;
+
+        private readonly object _lockPackets = new ();
+        private readonly object _lockStatistics = new ();
 
         private const string _rawPacketValueKey = "raw_packets";
         private const string _statisticsValueKey = "statistics";
@@ -42,8 +46,8 @@ namespace PacketSniffer
             _config = config;
             _redisService = redisService;
 
-            _statisticsQueue = new ConcurrentQueue<StatisticsEventArgs>();
-            _rawPacketsQueue = new ConcurrentQueue<RawCapture>();
+            _statisticsBatch = new List<StatisticsEventArgs>(_maxQueueSize);
+            _rawPacketsBatch = new List<RawCapture>(_maxQueueSize);
 
             if (int.TryParse(_config["MaxQueueSize"], out var maxQueueSize))
             {
@@ -218,12 +222,21 @@ namespace PacketSniffer
         /// <param name="e"></param>
         private void Device_OnPacketArrival(object sender, PacketCapture e)
         {
-            var rawPacket = e.GetPacket();
+            lock (_lockPackets)
+            {
+                var rawPacket = e.GetPacket();
+                _rawPacketsBatch.Add(rawPacket);
 
-            if (_rawPacketsQueue.Count < _maxQueueSize)
-                _rawPacketsQueue.Enqueue(rawPacket);                           
-            else
-                HandleRawPacketsQueueAsync().Wait();                                    
+                if (_rawPacketsBatch.Count >= _maxQueueSize)
+                {
+                    var packets = _rawPacketsBatch.ToList();
+                    _rawPacketsBatch.Clear();
+
+                    _ = _redisService.StreamAddAsync(
+                        packets.Select(p => new NameValueEntry(_rawPacketValueKey, JsonConvert.SerializeObject(p))).ToArray()
+                    );
+                }
+            }
         }
 
         /// <summary>
@@ -232,39 +245,18 @@ namespace PacketSniffer
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Device_OnPcapStatistics(object sender, StatisticsEventArgs e)
-        {          
-            if (_statisticsQueue.Count < _maxQueueSize)          
-                _statisticsQueue.Enqueue(e);                               
-            else          
-                HandleStatisticsQueueAsync().Wait();      
-        }
-
-        /// <summary>
-        /// Метод, необходимый для массовой загрузки сырых пакетов в поток Redis из очереди.
-        /// </summary>
-        /// <returns></returns>
-        private async Task HandleRawPacketsQueueAsync()
         {
-            var entries = new List<NameValueEntry>();
+            _statisticsBatch.Add(e);
 
-            while (_rawPacketsQueue.TryDequeue(out var rawPacket))              
-                entries.Add(new NameValueEntry(_rawPacketValueKey, JsonConvert.SerializeObject(rawPacket))); 
+            if (_statisticsBatch.Count >= _maxQueueSize)
+            {
+                var statistics = _statisticsBatch.ToList();
+                _statisticsBatch.Clear();                
 
-            await _redisService.StreamAddAsync([.. entries]);
-        }
-
-        /// <summary>
-        /// Метод, необходимый для массовой загрузки статистики в поток Redis из очереди.
-        /// </summary>
-        /// <returns></returns>
-        private async Task HandleStatisticsQueueAsync()
-        {
-            var entries = new List<NameValueEntry>();
-
-            while (_statisticsQueue.TryDequeue(out var statistics))
-                entries.Add(new NameValueEntry(_statisticsValueKey, JsonConvert.SerializeObject(statistics)));
-
-            await _redisService.StreamAddAsync([.. entries]);         
+                _ = _redisService.StreamAddAsync(
+                    statistics.Select(s => new NameValueEntry(_statisticsValueKey, JsonConvert.SerializeObject(s))).ToArray()
+                );
+            }
         }
 
         /// <summary>
