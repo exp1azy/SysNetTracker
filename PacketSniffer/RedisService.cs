@@ -24,7 +24,6 @@ namespace PacketSniffer
         /// <summary>
         /// Добавляет массив <see cref="NameValueEntry"/> в поток Redis по ключу <see cref="RedisKey"/>.
         /// </summary>
-        /// <param name="key">Ключ потока.</param>
         /// <param name="streamPairs">Данные.</param>
         /// <returns></returns>
         public async Task StreamAddAsync(NameValueEntry[] streamPairs) =>

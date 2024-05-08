@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PacketSnifferTests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f16efd315fe5c957637792efd13da046ee00bb1d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6c36feb37f8ab51b7aa55efc300493f16813719b")]
 [assembly: System.Reflection.AssemblyProductAttribute("PacketSnifferTests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PacketSnifferTests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

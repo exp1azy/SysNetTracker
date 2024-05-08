@@ -1,6 +1,5 @@
 using PacketSniffer.Resources;
 using PacketSniffer.Startup;
-using Serilog;
 
 namespace PacketSniffer
 {

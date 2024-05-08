@@ -5,18 +5,17 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>dotnet-PacketSniffer-e776a7d4-ef80-47b3-87b9-2c7f264b4998</UserSecretsId>
-    <ApplicationIcon>bin\sniffer_u0pcmjnky2ft.ico</ApplicationIcon>
+    <ApplicationIcon>Icons\sniffer.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="bin\sniffer_u0pcmjnky2ft.ico" />
+    <Content Include="Icons\sniffer.ico" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
 	<PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="8.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Serilog.Sinks.EventLog" Version="3.1.0" />
     <PackageReference Include="SharpPcap" Version="6.2.5" />
     <PackageReference Include="StackExchange.Redis" Version="2.7.17" />
     <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="8.0.0" />
@@ -49,5 +48,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Information.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="bin\" />
   </ItemGroup>
 </Project>
