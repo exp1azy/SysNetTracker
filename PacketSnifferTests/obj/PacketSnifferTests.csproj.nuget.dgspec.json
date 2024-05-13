@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\user41\\source\\repos\\SysNetTracker\\PacketSnifferTests\\PacketSnifferTests.csproj": {}
+    "C:\\Users\\Admin\\source\\repos\\SysNetTracker\\PacketSnifferTests\\PacketSnifferTests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\user41\\source\\repos\\SysNetTracker\\PacketSnifferTests\\PacketSnifferTests.csproj": {
+    "C:\\Users\\Admin\\source\\repos\\SysNetTracker\\PacketSnifferTests\\PacketSnifferTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user41\\source\\repos\\SysNetTracker\\PacketSnifferTests\\PacketSnifferTests.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\SysNetTracker\\PacketSnifferTests\\PacketSnifferTests.csproj",
         "projectName": "PacketSnifferTests",
-        "projectPath": "C:\\Users\\user41\\source\\repos\\SysNetTracker\\PacketSnifferTests\\PacketSnifferTests.csproj",
-        "packagesPath": "C:\\Users\\user41\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user41\\source\\repos\\SysNetTracker\\PacketSnifferTests\\obj\\",
+        "projectPath": "C:\\Users\\Admin\\source\\repos\\SysNetTracker\\PacketSnifferTests\\PacketSnifferTests.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Admin\\source\\repos\\SysNetTracker\\PacketSnifferTests\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\user41\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,15 +22,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "\\\\host109\\nupkg": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\user41\\source\\repos\\WebSpectre\\WebSpectre.Shared\\WebSpectre.Shared.csproj": {
-                "projectPath": "C:\\Users\\user41\\source\\repos\\WebSpectre\\WebSpectre.Shared\\WebSpectre.Shared.csproj"
+              "C:\\Users\\Admin\\source\\repos\\WebSpectre\\WebSpectre.Shared\\WebSpectre.Shared.csproj": {
+                "projectPath": "C:\\Users\\Admin\\source\\repos\\WebSpectre\\WebSpectre.Shared\\WebSpectre.Shared.csproj"
               }
             }
           }
@@ -99,21 +94,17 @@
         }
       }
     },
-    "C:\\Users\\user41\\source\\repos\\WebSpectre\\WebSpectre.Shared\\WebSpectre.Shared.csproj": {
+    "C:\\Users\\Admin\\source\\repos\\WebSpectre\\WebSpectre.Shared\\WebSpectre.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user41\\source\\repos\\WebSpectre\\WebSpectre.Shared\\WebSpectre.Shared.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\WebSpectre\\WebSpectre.Shared\\WebSpectre.Shared.csproj",
         "projectName": "WebSpectre.Shared",
-        "projectPath": "C:\\Users\\user41\\source\\repos\\WebSpectre\\WebSpectre.Shared\\WebSpectre.Shared.csproj",
-        "packagesPath": "C:\\Users\\user41\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user41\\source\\repos\\WebSpectre\\WebSpectre.Shared\\obj\\",
+        "projectPath": "C:\\Users\\Admin\\source\\repos\\WebSpectre\\WebSpectre.Shared\\WebSpectre.Shared.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Admin\\source\\repos\\WebSpectre\\WebSpectre.Shared\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\user41\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -121,7 +112,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "\\\\host109\\nupkg": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

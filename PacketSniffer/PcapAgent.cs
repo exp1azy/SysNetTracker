@@ -172,6 +172,9 @@ namespace PacketSniffer
         /// <exception cref="ApplicationException"></exception>
         private async Task ListenRequiredInterfaceAsync(LibPcapLiveDeviceList devices, int interfaceToSniff, CancellationToken cancellationToken)
         {
+            if (string.IsNullOrEmpty(_config["Filter"]))
+                throw new ApplicationException();
+
             using var statisticsDevice = new StatisticsDevice(devices[interfaceToSniff].Interface);
             using var device = devices[interfaceToSniff];
 
@@ -180,6 +183,9 @@ namespace PacketSniffer
 
             statisticsDevice.Open();
             device.Open();
+
+            statisticsDevice.Filter = _config["Filter"];
+            device.Filter = _config["Filter"];
 
             statisticsDevice.StartCapture();
             device.StartCapture();
